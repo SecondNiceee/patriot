@@ -28,7 +28,7 @@ export function FloatingSocials() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={social.name}
-          className="flex h-20 w-20 items-center justify-center rounded-2xl shadow-xl transition-transform hover:scale-105 bg-white"
+          className="flex h-20 w-20 items-center justify-center transition-transform hover:scale-105"
         >
           <Image
             src={social.icon}
