@@ -41,16 +41,14 @@ export function Header() {
     >
       <div className="container mx-auto max-w-7xl px-6">
         <div className="flex items-center justify-between h-20">
-          <div className="flex items-center gap-2">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logotip-VwnCpdJjURxGRO1YXtLXkkVNHmfLOE.png"
               alt="За Рулем"
               width={120}
               height={60}
-              className="h-auto w-auto"
+              className="w-[120px] translate-y-[2px]"
               priority
             />
-          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
