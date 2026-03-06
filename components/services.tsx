@@ -5,22 +5,6 @@ import Image from "next/image"
 
 const services = [
   {
-    title: "Помощь в восстановлении после лишения",
-    description: "Комплексное сопровождение при возврате водительских прав после лишения",
-    price: "50 000 руб.",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/A-category-atysuuqgi9PJFRElH0Zlk6QWF3CkmJ.jpg",
-    duration: "7-14 дней",
-    tags: ["Юридическая помощь", "Полное сопровождение"],
-  },
-  {
-    title: "Свидетельство об окончании автошколы",
-    description: "Получение свидетельства об окончании автошколы в кратчайшие сроки",
-    price: "35 000 руб.",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/B-category-U2VWch9dLHjfX4HHTpKKUjImvD2fTV.jpg",
-    duration: "1-3 дня",
-    tags: ["Официальный документ"],
-  },
-  {
     title: "Права категории B",
     description: "Самая популярная категория для легковых автомобилей. Быстрое оформление, гарантия законности",
     price: "65 000 руб.",
@@ -51,6 +35,22 @@ const services = [
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/D-category-dS7uHu2WCpOwlDHH08TzFD5Dqn2zax.jpg",
     duration: "7-14 дней",
     tags: ["Категория: D, D1"],
+  },
+  {
+    title: "Помощь в восстановлении после лишения",
+    description: "Комплексное сопровождение при возврате водительских прав после лишения",
+    price: "50 000 руб.",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/A-category-atysuuqgi9PJFRElH0Zlk6QWF3CkmJ.jpg",
+    duration: "7-14 дней",
+    tags: ["Юридическая помощь", "Полное сопровождение"],
+  },
+  {
+    title: "Свидетельство об окончании автошколы",
+    description: "Получение свидетельства об окончании автошколы в кратчайшие сроки",
+    price: "35 000 руб.",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/B-category-U2VWch9dLHjfX4HHTpKKUjImvD2fTV.jpg",
+    duration: "1-3 дня",
+    tags: ["Официальный документ"],
   },
 ]
 

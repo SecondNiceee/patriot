@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Phone, Mail, MapPin } from "lucide-react"
+import { Phone, Mail } from "lucide-react"
 
 export function Footer() {
   return (
@@ -36,10 +36,6 @@ export function Footer() {
                 <div className="flex items-center gap-3">
                   <Mail className="h-5 w-5" />
                   <span>robert.byrd.942@mail.ru</span>
-                </div>
-                <div className="flex items-start gap-3">
-                  <MapPin className="h-5 w-5 mt-1" />
-                  <span>Москва, ул. Примерная, д. 1</span>
                 </div>
               </div>
             </div>
