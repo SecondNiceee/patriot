@@ -10,12 +10,14 @@ import { ContactForm } from "@/components/contact-form"
 import { Testimonials } from "@/components/testimonials"
 import { Footer } from "@/components/footer"
 import { FloatingSocials } from "@/components/floating-socials"
+import { PopupForm } from "@/components/popup-form"
 
 export default function HomePage() {
   return (
     <main className="min-h-screen">
       <Header />
       <FloatingSocials />
+      <PopupForm />
       <Hero />
       <Stats />
       <Features />
