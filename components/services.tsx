@@ -13,6 +13,14 @@ const services = [
     tags: ["Юридическая помощь", "Полное сопровождение"],
   },
   {
+    title: "Свидетельство об окончании автошколы",
+    description: "Получение свидетельства об окончании автошколы в кратчайшие сроки",
+    price: "35 000 руб.",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/B-category-U2VWch9dLHjfX4HHTpKKUjImvD2fTV.jpg",
+    duration: "1-3 дня",
+    tags: ["Официальный документ"],
+  },
+  {
     title: "Права категории B",
     description: "Самая популярная категория для легковых автомобилей. Быстрое оформление, гарантия законности",
     price: "65 000 руб.",
@@ -59,7 +67,7 @@ export function Services() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((service, index) => (
             <div
               key={index}
