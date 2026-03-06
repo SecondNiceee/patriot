@@ -31,11 +31,7 @@ export function Footer() {
               <div className="space-y-3 text-white/70">
                 <div className="flex items-center gap-3">
                   <Phone className="h-5 w-5" />
-                  <span>+7 (914) 064-75-20</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Mail className="h-5 w-5" />
-                  <span>robert.byrd.942@mail.ru</span>
+                  <span>+7 495 847 04 99</span>
                 </div>
               </div>
             </div>
@@ -60,8 +56,11 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="pt-8 border-t border-white/10 text-center">
+          <div className="pt-8 border-t border-white/10 text-center space-y-4">
             <p className="text-sm text-white/50">© 2019-2024 Автошкола Патриот. Все права защищены.</p>
+            <p className="text-xs text-white/40">
+              Лицензия на осуществление образовательной деятельности серия: № Л035-01199-54/01010996, регистрационный № 039290 от 29.12.2023 г., выдана Министерством образования Новосибирской области ИП Лунева ИНН 540230515934 ОГРНИП 323547600028922 права защищены.
+            </p>
           </div>
         </div>
       </div>
