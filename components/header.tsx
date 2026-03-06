@@ -1,7 +1,8 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Menu, X, Shield } from "lucide-react"
+import { Menu, X } from "lucide-react"
+import Image from "next/image"
 import { useState, useEffect } from "react"
 
 export function Header() {
@@ -40,15 +41,15 @@ export function Header() {
     >
       <div className="container mx-auto max-w-7xl px-6">
         <div className="flex items-center justify-between h-20">
-          <div className="flex items-center gap-3">
-            <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-accent via-accent to-accent/80 flex items-center justify-center shadow-lg">
-              <Shield className="w-6 h-6 text-accent-foreground" />
-              <div className="absolute inset-0 rounded-xl bg-accent/20 blur-sm -z-10" />
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="text-xl font-bold text-white tracking-tight leading-none">Патриот</span>
-              <span className="text-[10px] font-medium text-white/60 uppercase tracking-widest">автошкола</span>
-            </div>
+          <div className="flex items-center gap-2">
+            <Image
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logotip-VwnCpdJjURxGRO1YXtLXkkVNHmfLOE.png"
+              alt="За Рулем"
+              width={120}
+              height={60}
+              className="h-auto w-auto"
+              priority
+            />
           </div>
 
           {/* Desktop Navigation */}
