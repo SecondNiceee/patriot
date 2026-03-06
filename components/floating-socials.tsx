@@ -20,7 +20,7 @@ const socials = [
 
 export function FloatingSocials() {
   return (
-    <div className="fixed right-4 bottom-6 z-50 flex flex-col gap-3">
+    <div className="fixed right-4 bottom-6 z-50 flex flex-col gap-2">
       {socials.map((social) => (
         <a
           key={social.name}
@@ -28,14 +28,14 @@ export function FloatingSocials() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={social.name}
-          className="flex h-20 w-20 items-center justify-center transition-transform hover:scale-105"
+          className={`${social.name === "WhatsApp" ? "-translate-y-px" : ""} flex h-15 w-15 items-center justify-center transition-transform hover:scale-105`}
         >
           <Image
             src={social.icon}
             alt={social.name}
             width={64}
             height={64}
-            className="h-16 w-16 object-contain"
+            className="h-13 w-13 object-contain"
           />
         </a>
       ))}
