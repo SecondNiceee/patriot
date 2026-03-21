@@ -1,10 +1,19 @@
+"use client"
+
+import { useStats } from "@/hooks/use-sanity"
+
+// Default data
+const defaultStats = [
+  { value: "2500+", label: "Довольных клиентов" },
+  { value: "98%", label: "Успешных кейсов" },
+  { value: "6 лет", label: "На рынке" },
+  { value: "24/7", label: "Поддержка клиентов" },
+]
+
 export function Stats() {
-  const stats = [
-    { value: "2500+", label: "Довольных клиентов" },
-    { value: "98%", label: "Успешных кейсов" },
-    { value: "6 лет", label: "На рынке" },
-    { value: "24/7", label: "Поддержка клиентов" },
-  ]
+  const { data, isLoading } = useStats()
+  
+  const stats = data?.items?.length ? data.items : defaultStats
 
   return (
     <section className="py-10 bg-gradient-to-b from-muted/50 to-background relative overflow-hidden">

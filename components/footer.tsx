@@ -1,7 +1,39 @@
+"use client"
+
 import Link from "next/link"
 import { Phone, Mail } from "lucide-react"
+import { useFooter, useSiteSettings } from "@/hooks/use-sanity"
+
+// Default data
+const defaultData = {
+  siteName: "Патриот",
+  description: "Помогаем получать водительские права быстро и без стресса с 2019 года",
+  quickLinks: [
+    { label: "О нас", href: "#features" },
+    { label: "Услуги", href: "#services" },
+    { label: "Контакты", href: "#contact" },
+    { label: "Политика конфиденциальности", href: "/privacy" },
+  ],
+  copyrightText: "2019-2024 Автошкола Патриот. Все права защищены.",
+}
+
+const defaultSettings = {
+  phone: "+7 (914) 064-75-20",
+  email: "robert.byrd.942@mail.ru",
+}
 
 export function Footer() {
+  const { data } = useFooter()
+  const { data: settings } = useSiteSettings()
+
+  const siteName = data?.siteName ?? defaultData.siteName
+  const description = data?.description ?? defaultData.description
+  const quickLinks = data?.quickLinks?.length ? data.quickLinks : defaultData.quickLinks
+  const copyrightText = data?.copyrightText ?? defaultData.copyrightText
+  
+  const phone = settings?.phone ?? defaultSettings.phone
+  const email = settings?.email ?? defaultSettings.email
+
   return (
     <footer className="relative py-12 px-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
       <div className="absolute inset-0 opacity-20">
@@ -19,9 +51,9 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
             {/* Brand */}
             <div className="space-y-4">
-              <h3 className="text-3xl font-bold text-white">Патриот</h3>
+              <h3 className="text-3xl font-bold text-white">{siteName}</h3>
               <p className="text-white/70 leading-relaxed">
-                Помогаем получать водительские права быстро и без стресса с 2019 года
+                {description}
               </p>
             </div>
 
@@ -31,11 +63,11 @@ export function Footer() {
               <div className="space-y-3 text-white/70">
                 <div className="flex items-center gap-3">
                   <Phone className="h-5 w-5" />
-                  <span>+7 (914) 064-75-20</span>
+                  <span>{phone}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="h-5 w-5" />
-                  <span>robert.byrd.942@mail.ru</span>
+                  <span>{email}</span>
                 </div>
               </div>
             </div>
@@ -44,24 +76,21 @@ export function Footer() {
             <div className="space-y-4">
               <h4 className="text-lg font-bold text-white">Быстрые ссылки</h4>
               <nav className="space-y-2 text-white/70">
-                <Link href="/about" className="block hover:text-accent transition-colors cursor-pointer">
-                  О нас
-                </Link>
-                <Link href="/services" className="block hover:text-accent transition-colors cursor-pointer">
-                  Услуги
-                </Link>
-                <Link href="/contact" className="block hover:text-accent transition-colors cursor-pointer">
-                  Контакты
-                </Link>
-                <Link href="/privacy" className="block hover:text-accent transition-colors cursor-pointer">
-                  Политика конфиденциальности
-                </Link>
+                {quickLinks.map((link, index) => (
+                  <Link 
+                    key={index} 
+                    href={link.href} 
+                    className="block hover:text-accent transition-colors cursor-pointer"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
               </nav>
             </div>
           </div>
 
           <div className="pt-8 border-t border-white/10 text-center">
-            <p className="text-sm text-white/50">© 2019-2024 Автошкола Патриот. Все права защищены.</p>
+            <p className="text-sm text-white/50">{copyrightText}</p>
           </div>
         </div>
       </div>

@@ -4,10 +4,27 @@ import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
 import { useState, useEffect } from "react"
+import { useHeader } from "@/hooks/use-sanity"
+import { getSanityImageUrl } from "@/lib/sanity"
+
+// Default data
+const defaultMenuItems = [
+  { label: "Услуги", href: "#services" },
+  { label: "Процесс", href: "#process" },
+  { label: "Гарантии", href: "#guarantees" },
+  { label: "Отзывы", href: "#testimonials" },
+  { label: "FAQ", href: "#faq" },
+]
+
+const defaultData = {
+  logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logotip-VwnCpdJjURxGRO1YXtLXkkVNHmfLOE.png",
+  ctaButtonText: "Связаться",
+}
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const { data, isLoading } = useHeader()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,13 +34,9 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const menuItems = [
-    { label: "Услуги", href: "#services" },
-    { label: "Процесс", href: "#process" },
-    { label: "Гарантии", href: "#guarantees" },
-    { label: "Отзывы", href: "#testimonials" },
-    { label: "FAQ", href: "#faq" },
-  ]
+  const logoUrl = data?.logo ? getSanityImageUrl(data.logo) : defaultData.logo
+  const menuItems = data?.navigation?.length ? data.navigation : defaultMenuItems
+  const ctaButtonText = data?.ctaButtonText ?? defaultData.ctaButtonText
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href)
@@ -42,7 +55,7 @@ export function Header() {
       <div className="container mx-auto max-w-7xl px-6">
         <div className="flex items-center justify-between h-20">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logotip-VwnCpdJjURxGRO1YXtLXkkVNHmfLOE.png"
+              src={logoUrl || defaultData.logo}
               alt="За Рулем"
               width={120}
               height={60}
@@ -69,7 +82,7 @@ export function Header() {
               onClick={() => scrollToSection("#contact")}
               className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold rounded-full px-6 cursor-pointer"
             >
-              Связаться
+              {ctaButtonText}
             </Button>
           </div>
 
@@ -96,7 +109,7 @@ export function Header() {
                   onClick={() => scrollToSection("#contact")}
                   className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold rounded-full w-full cursor-pointer"
                 >
-                  Связаться
+                  {ctaButtonText}
                 </Button>
               </div>
             </nav>

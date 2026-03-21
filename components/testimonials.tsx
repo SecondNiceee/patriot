@@ -1,6 +1,10 @@
-import { Star, Quote } from "lucide-react"
+"use client"
 
-const testimonials = [
+import { Star, Quote } from "lucide-react"
+import { useTestimonials } from "@/hooks/use-sanity"
+
+// Default data
+const defaultTestimonials = [
   {
     name: "Анна",
     age: 28,
@@ -21,17 +25,30 @@ const testimonials = [
   },
 ]
 
+const defaultData = {
+  sectionBadge: "Отзывы",
+  title: "Что говорят клиенты",
+  description: "Реальные отзывы тех, кто уже получил права с нами",
+}
+
 export function Testimonials() {
+  const { data, isLoading } = useTestimonials()
+
+  const sectionBadge = data?.sectionBadge ?? defaultData.sectionBadge
+  const title = data?.title ?? defaultData.title
+  const description = data?.description ?? defaultData.description
+  const testimonials = data?.items?.length ? data.items : defaultTestimonials
+
   return (
-    <section className="py-16 px-6 bg-gradient-to-br from-muted/50 via-secondary/30 to-muted/50">
+    <section id="testimonials" className="py-16 px-6 bg-gradient-to-br from-muted/50 via-secondary/30 to-muted/50">
       <div className="container mx-auto">
         <div className="text-center mb-16 space-y-4">
           <div className="inline-block">
-            <span className="text-sm font-semibold text-accent uppercase tracking-wider">Отзывы</span>
+            <span className="text-sm font-semibold text-accent uppercase tracking-wider">{sectionBadge}</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">Что говорят клиенты</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">{title}</h2>
           <p className="text-base text-muted-foreground leading-relaxed">
-            Реальные отзывы тех, кто уже получил права с нами
+            {description}
           </p>
         </div>
 
@@ -56,7 +73,9 @@ export function Testimonials() {
 
                 <div className="pt-4 border-t border-border">
                   <p className="font-bold text-card-foreground text-lg">{testimonial.name}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.age} лет</p>
+                  {testimonial.age && (
+                    <p className="text-sm text-muted-foreground">{testimonial.age} лет</p>
+                  )}
                 </div>
               </div>
 

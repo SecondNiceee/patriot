@@ -2,8 +2,10 @@
 
 import { useState } from "react"
 import { Check, ArrowRight } from "lucide-react"
+import { useProcess } from "@/hooks/use-sanity"
 
-const steps = [
+// Default data
+const defaultSteps = [
   {
     number: "01",
     title: "Оставьте заявку на получение прав",
@@ -36,11 +38,29 @@ const steps = [
   },
 ]
 
+const defaultData = {
+  sectionBadge: "Процесс",
+  title: "Как получить водительские права",
+  description: "Простой и прозрачный путь к оформлению прав за 6 шагов",
+}
+
 export function Process() {
   const [activeStep, setActiveStep] = useState(0)
+  const { data, isLoading } = useProcess()
+
+  const sectionBadge = data?.sectionBadge ?? defaultData.sectionBadge
+  const title = data?.title ?? defaultData.title
+  const description = data?.description ?? defaultData.description
+  const steps = data?.steps?.length 
+    ? data.steps.map((step, index) => ({
+        number: String(step.step || index + 1).padStart(2, '0'),
+        title: step.title,
+        description: step.description,
+      }))
+    : defaultSteps
 
   return (
-    <section className="py-16 px-6 bg-gradient-to-b from-muted/30 via-background to-muted/30 relative overflow-hidden">
+    <section id="process" className="py-16 px-6 bg-gradient-to-b from-muted/30 via-background to-muted/30 relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.03]">
         <div
           className="absolute inset-0"
@@ -54,13 +74,13 @@ export function Process() {
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="text-center mb-12 space-y-4">
           <div className="inline-block">
-            <span className="text-sm font-semibold text-accent uppercase tracking-wider">Процесс</span>
+            <span className="text-sm font-semibold text-accent uppercase tracking-wider">{sectionBadge}</span>
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-            Как получить водительские права
+            {title}
           </h2>
           <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Простой и прозрачный путь к оформлению прав за 6 шагов
+            {description}
           </p>
         </div>
 

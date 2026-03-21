@@ -1,24 +1,34 @@
-import Image from "next/image"
+"use client"
 
-const socials = [
-  {
-    name: "Telegram",
-    href: "https://t.me/aprawa",
-    icon: "/icons/telegram.svg",
-  },
-  {
-    name: "WhatsApp",
-    href: "https://wa.me/79140647520?text=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82!%20%F0%9F%91%8B%20%D0%9C%D0%B5%D0%BD%D1%8F%20%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B5%D1%81%D1%83%D0%B5%D1%82...",
-    icon: "/icons/whatsapp.svg",
-  },
-  {
-    name: "Max",
-    href: "https://max.ru/u/f9LHodD0cOJDbqEKxy6Fw982QLGp4w0kSzluuMZ7jODiE16H1-IRL-XSWsI",
-    icon: "/icons/max.svg",
-  },
-]
+import Image from "next/image"
+import { useSiteSettings } from "@/hooks/use-sanity"
 
 export function FloatingSocials() {
+  const { data } = useSiteSettings()
+
+  // Собираем только те соцсети, у которых указана ссылка
+  const socials = [
+    {
+      name: "Telegram",
+      href: data?.telegram,
+      icon: "/icons/telegram.svg",
+    },
+    {
+      name: "WhatsApp",
+      href: data?.whatsapp,
+      icon: "/icons/whatsapp.svg",
+    },
+    {
+      name: "Max",
+      href: data?.max,
+      icon: "/icons/max.svg",
+    },
+  ].filter(social => social.href) // Показываем только если ссылка указана
+
+  if (socials.length === 0) {
+    return null
+  }
+
   return (
     <div className="fixed right-4 bottom-6 z-50 flex flex-col gap-2">
       {socials.map((social) => (

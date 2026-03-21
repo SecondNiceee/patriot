@@ -2,8 +2,33 @@
 
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Send } from "lucide-react"
+import { useHero } from "@/hooks/use-sanity"
+import { getSanityImageUrl } from "@/lib/sanity"
+
+// Default data
+const defaultData = {
+  badge: "Более 2500 довольных клиентов с 2019 года",
+  title: "Получить водительские права",
+  subtitle: "Оформить права быстро, официально и с гарантией результата",
+  description: "Заказать водительское удостоверение категории B, C, D без лишних хлопот. Полное юридическое сопровождение и прозрачные цены.",
+  buttonText: "Бесплатная консультация",
+  telegramButtonText: "Telegram",
+  backgroundImage: "/images/license-document.png",
+}
 
 export function Hero() {
+  const { data, isLoading } = useHero()
+
+  const badge = data?.badge ?? defaultData.badge
+  const title = data?.title ?? defaultData.title
+  const subtitle = data?.highlightedText ?? data?.subtitle ?? defaultData.subtitle
+  const description = data?.description ?? defaultData.description
+  const buttonText = data?.buttonText ?? defaultData.buttonText
+  const telegramButtonText = data?.telegramButtonText ?? defaultData.telegramButtonText
+  const backgroundImage = data?.backgroundImage 
+    ? getSanityImageUrl(data.backgroundImage) 
+    : defaultData.backgroundImage
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900">
       {/* Background pattern */}
@@ -27,24 +52,23 @@ export function Hero() {
             <div className="inline-block">
               <div className="flex items-center gap-3 px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full">
                 <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                <p className="text-sm font-medium text-white/90">Более 2500 довольных клиентов с 2019 года</p>
+                <p className="text-sm font-medium text-white/90">{badge}</p>
               </div>
             </div>
 
             <div className="space-y-4">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-none">
-                Получить водительские права
+                {title}
               </h1>
               <div className="w-24 h-1 bg-cyan-400 rounded-full" />
             </div>
 
             <p className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white/90 leading-tight max-w-xl">
-              Оформить права быстро, официально и с гарантией результата
+              {subtitle}
             </p>
 
             <p className="text-lg text-white/70 max-w-xl leading-relaxed">
-              Заказать водительское удостоверение категории B, C, D без лишних хлопот. Полное юридическое сопровождение
-              и прозрачные цены.
+              {description}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -53,7 +77,7 @@ export function Hero() {
                 className="bg-cyan-500 hover:bg-cyan-600 text-white text-base font-semibold px-8 h-14 rounded-full shadow-xl hover:shadow-2xl transition-all"
                 onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
               >
-                Бесплатная консультация
+                {buttonText}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button
@@ -63,7 +87,7 @@ export function Hero() {
                 onClick={() => window.open("https://t.me/PravaZaDarom", "_blank")}
               >
                 <Send className="mr-2 h-5 w-5" />
-                Telegram
+                {telegramButtonText}
               </Button>
             </div>
           </div>
@@ -72,7 +96,7 @@ export function Hero() {
             <div className="absolute inset-0 bg-cyan-400/10 rounded-3xl blur-3xl" />
             <div className="relative h-[500px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm">
               <img
-                src="/images/license-document.png"
+                src={backgroundImage || defaultData.backgroundImage}
                 alt="Водительское удостоверение и свидетельство"
                 className="w-full h-full object-cover"
               />

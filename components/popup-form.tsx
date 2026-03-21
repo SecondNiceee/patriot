@@ -1,12 +1,17 @@
 "use client"
 
 import type React from "react"
+import type { SiteSettingsData } from "@/lib/sanity"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { X, Loader2, CheckCircle, Phone } from "lucide-react"
+
+interface PopupFormProps {
+  siteSettings?: SiteSettingsData | null
+}
 
 function formatPhoneNumber(value: string): string {
   const digits = value.replace(/\D/g, "")
@@ -33,7 +38,8 @@ function validateRussianPhone(phone: string): boolean {
   return digits.length === 11 && (digits.startsWith("7") || digits.startsWith("8"))
 }
 
-export function PopupForm() {
+export function PopupForm({ siteSettings }: PopupFormProps) {
+  const email = siteSettings?.email || "robert.byrd.942@mail.ru"
   const [isOpen, setIsOpen] = useState(false)
   const [formData, setFormData] = useState({ name: "", phone: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -129,7 +135,7 @@ export function PopupForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          to: "robert.byrd.942@mail.ru",
+          to: email,
           subject: `Заявка из popup от ${formData.name} | ${formData.phone}`,
           message: messageHtml,
           fromName: "Патриот",

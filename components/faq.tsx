@@ -2,8 +2,10 @@
 
 import { useState } from "react"
 import { Plus, Minus, HelpCircle } from "lucide-react"
+import { useFaq } from "@/hooks/use-sanity"
 
-const faqs = [
+// Default data
+const defaultFaqs = [
   {
     question: "Сколько времени занимает получение водительских прав?",
     answer:
@@ -36,11 +38,21 @@ const faqs = [
   },
 ]
 
+const defaultData = {
+  title: "Вопросы о получении прав",
+  description: "Ответы на популярные вопросы об оформлении водительского удостоверения. Не нашли ответ? Свяжитесь с нами!",
+}
+
 export function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const { data, isLoading } = useFaq()
+
+  const title = data?.title ?? defaultData.title
+  const description = data?.description ?? defaultData.description
+  const faqs = data?.items?.length ? data.items : defaultFaqs
 
   return (
-    <section className="py-16 px-6 relative overflow-hidden bg-background">
+    <section id="faq" className="py-16 px-6 relative overflow-hidden bg-background">
       {/* Background effects */}
       <div className="absolute inset-0 opacity-10">
         <div
@@ -64,11 +76,10 @@ export function Faq() {
               <div className="space-y-3">
                 <span className="text-sm font-semibold text-accent uppercase tracking-wider block">FAQ</span>
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                  Вопросы о получении прав
+                  {title}
                 </h2>
                 <p className="text-base text-muted-foreground leading-relaxed max-w-sm">
-                  Ответы на популярные вопросы об оформлении водительского удостоверения. Не нашли ответ? Свяжитесь с
-                  нами!
+                  {description}
                 </p>
               </div>
               <div className="pt-2">

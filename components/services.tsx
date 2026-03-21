@@ -2,8 +2,11 @@
 
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { useServices } from "@/hooks/use-sanity"
+import { getSanityImageUrl } from "@/lib/sanity"
 
-const services = [
+// Default data
+const defaultServices = [
   {
     title: "Права категории B",
     description: "Самая популярная категория для легковых автомобилей. Быстрое оформление, гарантия законности",
@@ -54,16 +57,33 @@ const services = [
   },
 ]
 
+const defaultData = {
+  title: "Услуги по покупке водительских прав",
+  description: "Предоставляем полный спектр услуг по получению водительских прав любой категории. От консультации до готового удостоверения в руках.",
+}
+
 export function Services() {
+  const { data, isLoading } = useServices()
+
+  const title = data?.title ?? defaultData.title
+  const description = data?.description ?? defaultData.description
+  const services = data?.items?.length 
+    ? data.items.map(item => ({
+        ...item,
+        image: item.image ? getSanityImageUrl(item.image) : "/categoryB.jpg",
+        tags: item.tags || [],
+      }))
+    : defaultServices
+
   return (
     <section id="services" className="py-16 px-6 bg-background">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-12 space-y-4">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-            Услуги по покупке водительских прав
+            {title}
           </h2>
           <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Предоставляем полный спектр услуг по получению водительских прав любой категории. От консультации до готового удостоверения в руках.
+            {description}
           </p>
         </div>
 
@@ -76,7 +96,7 @@ export function Services() {
               {/* Image */}
               <div className="relative h-48 overflow-hidden border-2 border-accent/60 rounded-t-2xl m-3 mb-0">
                 <Image
-                  src={service.image}
+                  src={service.image || "/categoryB.jpg"}
                   alt={service.title}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"

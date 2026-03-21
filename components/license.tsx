@@ -3,8 +3,11 @@
 import { useState } from "react"
 import Image from "next/image"
 import { Award, X, ChevronLeft, ChevronRight } from "lucide-react"
+import { useLicense } from "@/hooks/use-sanity"
+import { getSanityImageUrl } from "@/lib/sanity"
 
-const licenseImages = [
+// Default data
+const defaultLicenseImages = [
   {
     src: "/license1.jpg",
     alt: "Лицензия на осуществление образовательной деятельности №6651",
@@ -22,8 +25,26 @@ const licenseImages = [
   },
 ]
 
+const defaultData = {
+  title: "Лицензия и документы",
+  description: "Мы работаем полностью официально. Наша деятельность лицензирована Региональной службой по надзору и контролю в сфере образования Ростовской области.",
+  licenseNumber: "Лицензия № 6651 — Серия 61Л01 № 0004324 — Бессрочная",
+}
+
 export function License() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const { data, isLoading } = useLicense()
+
+  const title = data?.title ?? defaultData.title
+  const description = data?.description ?? defaultData.description
+  const licenseNumber = data?.licenseNumber ?? defaultData.licenseNumber
+  const licenseImages = data?.images?.length
+    ? data.images.map((img, index) => ({
+        src: img.image ? getSanityImageUrl(img.image) : defaultLicenseImages[index]?.src || "/license1.jpg",
+        alt: img.alt || defaultLicenseImages[index]?.alt || "Лицензия",
+        title: img.title || defaultLicenseImages[index]?.title || `Лицензия ${index + 1}`,
+      }))
+    : defaultLicenseImages
 
   const openLightbox = (index: number) => setLightboxIndex(index)
   const closeLightbox = () => setLightboxIndex(null)
@@ -41,11 +62,10 @@ export function License() {
             <Award className="h-8 w-8 text-primary" />
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
-            Лицензия и документы
+            {title}
           </h2>
           <p className="text-base text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Мы работаем полностью официально. Наша деятельность лицензирована Региональной службой по
-            надзору и контролю в сфере образования Ростовской области.
+            {description}
           </p>
         </div>
 
@@ -54,7 +74,7 @@ export function License() {
           <div className="inline-flex items-center gap-3 bg-accent/10 border border-accent/20 rounded-2xl px-6 py-3">
             <Award className="h-5 w-5 text-accent flex-shrink-0" />
             <span className="text-sm font-medium text-foreground">
-              Лицензия №&nbsp;6651 &mdash; Серия 61Л01 №&nbsp;0004324 &mdash; Бессрочная
+              {licenseNumber}
             </span>
           </div>
         </div>
@@ -70,7 +90,7 @@ export function License() {
             >
               <div className="relative aspect-[3/4] w-full">
                 <Image
-                  src={img.src}
+                  src={img.src || "/license1.jpg"}
                   alt={img.alt}
                   fill
                   className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
@@ -114,14 +134,14 @@ export function License() {
             onClick={(e) => e.stopPropagation()}
           >
             <Image
-              src={licenseImages[lightboxIndex].src}
+              src={licenseImages[lightboxIndex].src || "/license1.jpg"}
               alt={licenseImages[lightboxIndex].alt}
               width={800}
               height={1067}
               className="w-full h-auto rounded-xl shadow-2xl"
             />
             <p className="text-center text-white/80 text-sm mt-3">
-              {licenseImages[lightboxIndex].title} &mdash; {lightboxIndex + 1} / {licenseImages.length}
+              {licenseImages[lightboxIndex].title} — {lightboxIndex + 1} / {licenseImages.length}
             </p>
           </div>
 
