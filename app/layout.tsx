@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { HeadScripts } from "@/components/head-scripts"
+import { DynamicHead } from "@/components/dynamic-head"
 import { getSiteSettings } from "@/lib/sanity"
 import "./globals.css"
 
@@ -117,6 +118,7 @@ export default async function RootLayout({
         <HeadScripts scripts={siteSettings?.headScripts} />
       </head>
       <body className={`font-sans antialiased`}>
+        <DynamicHead />
         {children}
         <Analytics />
       </body>

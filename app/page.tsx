@@ -12,16 +12,13 @@ import { Testimonials } from "@/components/testimonials"
 import { Footer } from "@/components/footer"
 import { FloatingSocials } from "@/components/floating-socials"
 import { PopupForm } from "@/components/popup-form"
-import { getSiteSettings } from "@/lib/sanity"
 
-export default async function HomePage() {
-  const siteSettings = await getSiteSettings()
-
+export default function HomePage() {
   return (
     <main className="min-h-screen">
       <Header />
       <FloatingSocials />
-      <PopupForm siteSettings={siteSettings} />
+      <PopupForm />
       <Hero />
       <Stats />
       <Features />
@@ -29,7 +26,7 @@ export default async function HomePage() {
       <Process />
       <Guarantees />
       <License />
-      <ContactForm siteSettings={siteSettings} />
+      <ContactForm />
       <Testimonials />
       <Faq />
       <Footer />
