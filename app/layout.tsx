@@ -71,8 +71,38 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Patriot Prava - Получение водительских прав",
+    description:
+      "Получить водительские права быстро и надёжно. Оформить права без автошколы с гарантией качества.",
+    url: "https://patriot-prava.ru",
+    telephone: "+7 (XXX) XXX-XX-XX",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "RU",
+      addressLocality: "Россия",
+    },
+    sameAs: ["https://t.me/patriot", "https://wa.me/patriot"],
+    priceRange: "$$$",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      ratingCount: "150",
+    },
+  }
+
   return (
     <html lang="ru">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schemaData),
+          }}
+        />
+      </head>
       <body className={`font-sans antialiased`}>
         {children}
         <Analytics />

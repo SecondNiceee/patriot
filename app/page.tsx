@@ -5,6 +5,7 @@ import { Features } from "@/components/features"
 import { Services } from "@/components/services"
 import { Process } from "@/components/process"
 import { Guarantees } from "@/components/guarantees"
+import { License } from "@/components/license"
 import { Faq } from "@/components/faq"
 import { ContactForm } from "@/components/contact-form"
 import { Testimonials } from "@/components/testimonials"
@@ -24,6 +25,7 @@ export default function HomePage() {
       <Services />
       <Process />
       <Guarantees />
+      <License />
       <ContactForm />
       <Testimonials />
       <Faq />
