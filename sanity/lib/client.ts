@@ -7,9 +7,17 @@ export const client = createClient({
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
   apiVersion: "2024-01-01",
   useCdn: false,
-  // Disable caching to always get fresh data
   perspective: "published",
+  // Disable Next.js fetch cache - critical for seeing updates
+  stega: { enabled: false },
 })
+
+// Client with no-cache fetch options for server components
+export async function sanityFetch<T>(query: string, params = {}): Promise<T> {
+  return client.fetch(query, params, {
+    next: { revalidate: 0 }, // Disable Next.js cache
+  })
+}
 
 const builder = imageUrlBuilder(client)
 
