@@ -36,7 +36,7 @@ import {
   getFooterWithDefaults,
 } from "@/lib/sanity"
 
-export const revalidate = 60 // ISR: revalidate every 60 seconds
+export const revalidate = 0 // Always fetch fresh data from Sanity
 
 export default async function HomePage() {
   // Fetch all data on the server in parallel

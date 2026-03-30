@@ -1,4 +1,4 @@
-import { client, urlFor } from "@/sanity/lib/client"
+import { client, urlFor, sanityFetch } from "@/sanity/lib/client"
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
 
 // Types for Sanity data
@@ -175,57 +175,57 @@ export const queries = {
   siteSettings: `*[_type == "siteSettings"][0]`,
 }
 
-// Fetch functions
+// Fetch functions - using sanityFetch to bypass Next.js cache
 export async function getHero(): Promise<HeroData | null> {
-  return client.fetch(queries.hero)
+  return sanityFetch<HeroData | null>(queries.hero)
 }
 
 export async function getStats(): Promise<StatsData | null> {
-  return client.fetch(queries.stats)
+  return sanityFetch<StatsData | null>(queries.stats)
 }
 
 export async function getFeatures(): Promise<FeaturesData | null> {
-  return client.fetch(queries.features)
+  return sanityFetch<FeaturesData | null>(queries.features)
 }
 
 export async function getServices(): Promise<ServicesData | null> {
-  return client.fetch(queries.services)
+  return sanityFetch<ServicesData | null>(queries.services)
 }
 
 export async function getProcess(): Promise<ProcessData | null> {
-  return client.fetch(queries.process)
+  return sanityFetch<ProcessData | null>(queries.process)
 }
 
 export async function getGuarantees(): Promise<GuaranteesData | null> {
-  return client.fetch(queries.guarantees)
+  return sanityFetch<GuaranteesData | null>(queries.guarantees)
 }
 
 export async function getLicense(): Promise<LicenseData | null> {
-  return client.fetch(queries.license)
+  return sanityFetch<LicenseData | null>(queries.license)
 }
 
 export async function getTestimonials(): Promise<TestimonialsData | null> {
-  return client.fetch(queries.testimonials)
+  return sanityFetch<TestimonialsData | null>(queries.testimonials)
 }
 
 export async function getFaq(): Promise<FaqData | null> {
-  return client.fetch(queries.faq)
+  return sanityFetch<FaqData | null>(queries.faq)
 }
 
 export async function getContact(): Promise<ContactData | null> {
-  return client.fetch(queries.contact)
+  return sanityFetch<ContactData | null>(queries.contact)
 }
 
 export async function getHeader(): Promise<HeaderData | null> {
-  return client.fetch(queries.header)
+  return sanityFetch<HeaderData | null>(queries.header)
 }
 
 export async function getFooter(): Promise<FooterData | null> {
-  return client.fetch(queries.footer)
+  return sanityFetch<FooterData | null>(queries.footer)
 }
 
 export async function getSiteSettings(): Promise<SiteSettingsData | null> {
-  return client.fetch(queries.siteSettings)
+  return sanityFetch<SiteSettingsData | null>(queries.siteSettings)
 }
 
 // Helper to get image URL
