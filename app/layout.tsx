@@ -19,7 +19,7 @@ export const viewport: Viewport = {
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteSettings = await getSiteSettings()
-  const siteUrl = siteSettings?.siteUrl || "https://patriot-prava.ru"
+  const siteUrl = process.env.SITE_URL || siteSettings?.siteUrl || "https://patriot-prava.ru"
   const faviconUrl = `${siteUrl}/favicon.ico`
 
   return {
@@ -101,7 +101,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const siteSettings = await getSiteSettings()
-  const siteUrl = siteSettings?.siteUrl || "https://patriot-prava.ru"
+  const siteUrl = process.env.SITE_URL || siteSettings?.siteUrl || "https://patriot-prava.ru"
 
   const schemaData = {
     "@context": "https://schema.org",
