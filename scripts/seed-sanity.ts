@@ -5,7 +5,7 @@ const client = createClient({
   dataset: "production",
   apiVersion: "2024-01-01",
   useCdn: false,
-  token: process.env.SANITY_API_TOKEN,
+  token: "skGxvX7AOFlbYBHD2xSxaPCfwvTIg2uE6uQS7YbdlAzb7pNUMgEhqqF9sG6XYCdHXb5QCyOYxTMnr4yNi9zihhvKHqiBiSKFkpN8ULfWUX7VqsrECtN923NUgpLUUbuLg6Jwpyilj952cAXSkW12p6WR7vUpWLUKTH1ospHXK2ExHczMAMoZ",
 })
 
 async function seed() {
