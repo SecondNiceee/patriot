@@ -14,28 +14,9 @@ export const client = createClient({
 
 // Client with no-cache fetch options for server components
 export async function sanityFetch<T>(query: string, params = {}): Promise<T> {
-  console.log("[v0] Sanity fetch starting:", {
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "tegzgdyt",
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
-    query: query.substring(0, 50) + "...",
+  return client.fetch(query, params, {
+    next: { revalidate: 0 }, // Disable Next.js cache
   })
-  
-  try {
-    const result = await client.fetch(query, params, {
-      next: { revalidate: 0 }, // Disable Next.js cache
-    })
-    
-    console.log("[v0] Sanity fetch result:", { 
-      query: query.substring(0, 50) + "...",
-      resultType: typeof result,
-      resultValue: JSON.stringify(result).substring(0, 100) + "..."
-    })
-    
-    return result
-  } catch (error) {
-    console.error("[v0] Sanity fetch error:", error)
-    throw error
-  }
 }
 
 const builder = imageUrlBuilder(client)
