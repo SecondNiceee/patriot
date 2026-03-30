@@ -158,21 +158,21 @@ export interface SiteSettingsData {
   headScripts?: HeadScript[]
 }
 
-// GROQ Queries
+// GROQ Queries - order by _updatedAt desc to get the most recently updated document
 export const queries = {
-  hero: `*[_type == "hero"][0]`,
-  stats: `*[_type == "stats"][0]`,
-  features: `*[_type == "features"][0]`,
-  services: `*[_type == "services"][0]`,
-  process: `*[_type == "process"][0]`,
-  guarantees: `*[_type == "guarantees"][0]`,
-  license: `*[_type == "license"][0]`,
-  testimonials: `*[_type == "testimonials"][0]`,
-  faq: `*[_type == "faq"][0]`,
-  contact: `*[_type == "contact"][0]`,
-  header: `*[_type == "header"][0]`,
-  footer: `*[_type == "footer"][0]`,
-  siteSettings: `*[_type == "siteSettings"][0]`,
+  hero: `*[_type == "hero"] | order(_updatedAt desc)[0]`,
+  stats: `*[_type == "stats"] | order(_updatedAt desc)[0]`,
+  features: `*[_type == "features"] | order(_updatedAt desc)[0]`,
+  services: `*[_type == "services"] | order(_updatedAt desc)[0]`,
+  process: `*[_type == "process"] | order(_updatedAt desc)[0]`,
+  guarantees: `*[_type == "guarantees"] | order(_updatedAt desc)[0]`,
+  license: `*[_type == "license"] | order(_updatedAt desc)[0]`,
+  testimonials: `*[_type == "testimonials"] | order(_updatedAt desc)[0]`,
+  faq: `*[_type == "faq"] | order(_updatedAt desc)[0]`,
+  contact: `*[_type == "contact"] | order(_updatedAt desc)[0]`,
+  header: `*[_type == "header"] | order(_updatedAt desc)[0]`,
+  footer: `*[_type == "footer"] | order(_updatedAt desc)[0]`,
+  siteSettings: `*[_type == "siteSettings"] | order(_updatedAt desc)[0]`,
 }
 
 // Fetch functions - using sanityFetch to bypass Next.js cache
@@ -432,7 +432,7 @@ const DEFAULT_FAQ: FaqData = {
     },
     {
       question: "Есть ли рассрочка на оформление водительских прав?",
-      answer: "Да, мы предлагаем удобную рассрочку платежа для получения прав без процентов и переплат. Детали можно уточнить при консультации.",
+      answer: "Да, мы предлагаем удобную рассрочку платежа для получения прав без процентов и перепла��. Детали можно уточнить при консультации.",
     },
   ],
 }
