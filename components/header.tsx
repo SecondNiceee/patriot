@@ -16,7 +16,7 @@ const defaultMenuItems = [
 ]
 
 const defaultData = {
-  logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logotip-VwnCpdJjURxGRO1YXtLXkkVNHmfLOE.png",
+  logo: "/logotip.png",
   ctaButtonText: "Связаться",
 }
 
