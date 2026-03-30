@@ -15,6 +15,7 @@ export const client = createClient({
 // Client with no-cache fetch options for server components
 export async function sanityFetch<T>(query: string, params = {}): Promise<T> {
   return client.fetch(query, params, {
+    cache: 'no-store', // Completely disable fetch cache
     next: { revalidate: 0 }, // Disable Next.js cache
   })
 }
