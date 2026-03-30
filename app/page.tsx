@@ -26,6 +26,14 @@ import {
   getContact,
   getFooter,
   getSiteSettings,
+  getServicesWithDefaults,
+  getFeaturesWithDefaults,
+  getProcessWithDefaults,
+  getGuaranteesWithDefaults,
+  getFaqWithDefaults,
+  getTestimonialsWithDefaults,
+  getHeaderWithDefaults,
+  getFooterWithDefaults,
 } from "@/lib/sanity"
 
 export const revalidate = 60 // ISR: revalidate every 60 seconds
@@ -48,17 +56,17 @@ export default async function HomePage() {
     siteSettingsData,
   ] = await Promise.all([
     getHero(),
-    getHeader(),
+    getHeaderWithDefaults(),
     getStats(),
-    getFeatures(),
-    getServices(),
-    getProcess(),
-    getGuarantees(),
+    getFeaturesWithDefaults(),
+    getServicesWithDefaults(),
+    getProcessWithDefaults(),
+    getGuaranteesWithDefaults(),
     getLicense(),
-    getTestimonials(),
-    getFaq(),
+    getTestimonialsWithDefaults(),
+    getFaqWithDefaults(),
     getContact(),
-    getFooter(),
+    getFooterWithDefaults(),
     getSiteSettings(),
   ])
 

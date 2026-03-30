@@ -233,3 +233,299 @@ export function getSanityImageUrl(source: SanityImageSource | undefined): string
   if (!source) return null
   return urlFor(source).url()
 }
+
+// Default values for fallback
+const DEFAULT_SERVICES: ServicesData = {
+  title: "Наши услуги",
+  description: "Полный спектр услуг по оформлению водительских прав",
+  items: [
+    {
+      title: "Права категории B",
+      description: "Самая популярная категория для легковых автомобилей. Быстрое оформление, гарантия законности",
+      price: "65 000 руб.",
+      duration: "3-7 дней",
+      tags: ["Категория: B"],
+    },
+    {
+      title: "Права категории A",
+      description: "Права на мотоциклы и мопеды. Быстрое оформление без экзаменов. Официальное внесение в базу ГИБДД за 3-5 дней",
+      price: "55 000 руб.",
+      duration: "3-5 дней",
+      tags: ["Категория: A, A1"],
+    },
+    {
+      title: "Права категории C",
+      description: "Права на грузовые автомобили до 7,5 тонн. Профессиональное оформление с гарантией качества документов",
+      price: "75 000 руб.",
+      duration: "5-10 дней",
+      tags: ["Категория: C, C1"],
+    },
+    {
+      title: "Права категории D",
+      description: "Права на пассажирский транспорт и автобусы. Полное оформление с гарантией качества",
+      price: "85 000 руб.",
+      duration: "7-14 дней",
+      tags: ["Категория: D, D1"],
+    },
+    {
+      title: "Помощь в восстановлении после лишения",
+      description: "Комплексное сопровождение при возврате водительских прав после лишения",
+      price: "50 000 руб.",
+      duration: "7-14 дней",
+      tags: ["Юридическая помощь", "Полное сопровождение"],
+    },
+    {
+      title: "Свидетельство об окончании автошколы",
+      description: "Получение свидетельства об окончании автошколы в кратчайшие сроки",
+      price: "35 000 руб.",
+      duration: "1-3 дня",
+      tags: ["Официальный документ"],
+    },
+  ],
+}
+
+const DEFAULT_FEATURES: FeaturesData = {
+  title: "Почему выбирают нас",
+  sectionBadge: "Преимущества",
+  items: [
+    {
+      icon: "Car",
+      title: "Полное сопровождение",
+      description: "Ведём вас от первой консультации до момента получения удостоверения в руки.",
+      stat: "100%",
+      statLabel: "поддержка",
+    },
+    {
+      icon: "Zap",
+      title: "Быстрые сроки",
+      description: "Оптимизированный процесс позволяет получить права в кратчайшие сроки.",
+      stat: "14",
+      statLabel: "дней",
+    },
+    {
+      icon: "FileCheck",
+      title: "Юридическая чистота",
+      description: "Все документы оформляются официально с соблюдением законодательства.",
+      stat: "100%",
+      statLabel: "легально",
+    },
+    {
+      icon: "Shield",
+      title: "Гарантия результата",
+      description: "Гарантируем получение водительского удостоверения или возврат средств.",
+      stat: "5 лет",
+      statLabel: "гарантия",
+    },
+    {
+      icon: "Clock",
+      title: "Поддержка 24/7",
+      description: "Наши специалисты всегда на связи и готовы ответить на ваши вопросы.",
+      stat: "24/7",
+      statLabel: "онлайн",
+    },
+    {
+      icon: "Users",
+      title: "Индивидуальный подход",
+      description: "Учитываем особенности каждого клиента и подбираем оптимальное решение.",
+      stat: "2500+",
+      statLabel: "клиентов",
+    },
+  ],
+}
+
+const DEFAULT_PROCESS: ProcessData = {
+  title: "Процесс получения прав",
+  sectionBadge: "Как это работает",
+  steps: [
+    {
+      step: 1,
+      title: "Оставьте заявку на получение прав",
+      description: "Свяжитесь с нами через форму на сайте, WhatsApp, Telegram или позвоните напрямую.",
+    },
+    {
+      step: 2,
+      title: "Бесплатная консультация",
+      description: "Наш специалист проконсультирует вас, расскажет как получить права и подберёт оптимальное решение.",
+    },
+    {
+      step: 3,
+      title: "Оформление документов",
+      description: "Собираем и оформляем все необходимые документы для получения водительского удостоверения.",
+    },
+    {
+      step: 4,
+      title: "Обучение и подготовка",
+      description: "Проводим обучение по теории и практике вождения с опытными инструкторами.",
+    },
+    {
+      step: 5,
+      title: "Сдача экзаменов",
+      description: "Сопровождаем вас на экзаменах в ГИБДД, помогаем со всеми организационными вопросами.",
+    },
+    {
+      step: 6,
+      title: "Получение водительского удостоверения",
+      description: "Вы получаете водительские права и можете законно управлять автомобилем.",
+    },
+  ],
+}
+
+const DEFAULT_GUARANTEES: GuaranteesData = {
+  title: "Наши гарантии",
+  description: "Мы отвечаем за качество нашей работы",
+  items: [
+    {
+      icon: "FileCheck",
+      title: "Официальное оформление",
+      description: "100% официальное оформление всех документов",
+    },
+    {
+      icon: "Banknote",
+      title: "Возврат средств",
+      description: "Возврат средств, если не получите права",
+    },
+    {
+      icon: "Lock",
+      title: "Конфиденциальность",
+      description: "Конфиденциальность ваших данных",
+    },
+    {
+      icon: "Award",
+      title: "Прозрачные цены",
+      description: "Прозрачное ценообразование без скрытых платежей",
+    },
+    {
+      icon: "Shield",
+      title: "Юридическое сопровождение",
+      description: "Юридическое сопровождение на всех этапах",
+    },
+    {
+      icon: "Headphones",
+      title: "Поддержка после получения",
+      description: "Поддержка после получения прав",
+    },
+  ],
+}
+
+const DEFAULT_FAQ: FaqData = {
+  title: "Частые вопросы",
+  items: [
+    {
+      question: "Сколько времени занимает получение водительских прав?",
+      answer: "В среднем процесс оформления прав занимает от 2 до 4 недель в зависимости от выбранной программы. Мы стараемся оптимизировать все этапы для максимально быстрого результата.",
+    },
+    {
+      question: "Какие документы нужны чтобы заказать права?",
+      answer: "Базово требуется паспорт гражданина РФ и медицинская справка. Все остальные документы мы поможем собрать и оформить в процессе получения водительского удостоверения.",
+    },
+    {
+      question: "Что входит в стоимость оформления прав?",
+      answer: "В стоимость входит: теоретическое обучение, практические занятия по вождению, учебные материалы, сопровождение на экзаменах в ГИБДД, все необходимые документы.",
+    },
+    {
+      question: "Можно ли получить права без посещения автошколы?",
+      answer: "Да, мы предлагаем программы получения водительского удостоверения с минимальным посещением. Гибкий график позволяет совмещать оформление прав с работой.",
+    },
+    {
+      question: "Что делать, если не получилось сдать экзамен?",
+      answer: "Не переживайте! Мы предоставляем дополнительные занятия для подготовки к пересдаче и сопровождаем вас до успешного получения прав.",
+    },
+    {
+      question: "Есть ли рассрочка на оформление водительских прав?",
+      answer: "Да, мы предлагаем удобную рассрочку платежа для получения прав без процентов и переплат. Детали можно уточнить при консультации.",
+    },
+  ],
+}
+
+const DEFAULT_TESTIMONIALS: TestimonialsData = {
+  title: "Отзывы клиентов",
+  sectionBadge: "Они нам доверяют",
+  items: [
+    {
+      name: "Анна",
+      age: 28,
+      rating: 5,
+      text: "Очень переживала, но ребята всё объяснили и помогли быстро получить права. Спасибо Патриот!",
+    },
+    {
+      name: "Игорь",
+      age: 32,
+      rating: 5,
+      text: "Все сделали без нервов, сопровождение на каждом этапе. Рекомендую!",
+    },
+    {
+      name: "Дмитрий",
+      age: 41,
+      rating: 5,
+      text: "Права получил в срок, как и обещали. Отличная автошкола!",
+    },
+  ],
+}
+
+const DEFAULT_HEADER: HeaderData = {
+  siteName: "Patriot Prava",
+  navigation: [
+    { label: "Услуги", href: "#services" },
+    { label: "Преимущества", href: "#features" },
+    { label: "Процесс", href: "#process" },
+    { label: "Гарантии", href: "#guarantees" },
+    { label: "Отзывы", href: "#testimonials" },
+    { label: "FAQ", href: "#faq" },
+  ],
+  ctaButtonText: "Получить консультацию",
+}
+
+const DEFAULT_FOOTER: FooterData = {
+  siteName: "Patriot Prava",
+  quickLinks: [
+    { label: "Услуги", href: "#services" },
+    { label: "Преимущества", href: "#features" },
+    { label: "Процесс", href: "#process" },
+    { label: "Гарантии", href: "#guarantees" },
+    { label: "Отзывы", href: "#testimonials" },
+    { label: "FAQ", href: "#faq" },
+    { label: "Контакты", href: "#contact" },
+  ],
+  copyrightText: "© 2024 Patriot Prava. Все права защищены.",
+}
+
+// Fetch functions with fallbacks
+export async function getServicesWithDefaults(): Promise<ServicesData> {
+  const data = await getServices()
+  return data || DEFAULT_SERVICES
+}
+
+export async function getFeaturesWithDefaults(): Promise<FeaturesData> {
+  const data = await getFeatures()
+  return data || DEFAULT_FEATURES
+}
+
+export async function getProcessWithDefaults(): Promise<ProcessData> {
+  const data = await getProcess()
+  return data || DEFAULT_PROCESS
+}
+
+export async function getGuaranteesWithDefaults(): Promise<GuaranteesData> {
+  const data = await getGuarantees()
+  return data || DEFAULT_GUARANTEES
+}
+
+export async function getFaqWithDefaults(): Promise<FaqData> {
+  const data = await getFaq()
+  return data || DEFAULT_FAQ
+}
+
+export async function getTestimonialsWithDefaults(): Promise<TestimonialsData> {
+  const data = await getTestimonials()
+  return data || DEFAULT_TESTIMONIALS
+}
+
+export async function getHeaderWithDefaults(): Promise<HeaderData> {
+  const data = await getHeader()
+  return data || DEFAULT_HEADER
+}
+
+export async function getFooterWithDefaults(): Promise<FooterData> {
+  const data = await getFooter()
+  return data || DEFAULT_FOOTER
+}
