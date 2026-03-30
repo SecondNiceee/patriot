@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
   typescript: {
     ignoreBuildErrors: true,
   },
