@@ -1,7 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
-
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -22,7 +20,16 @@ const nextConfig = {
   reactStrictMode: true,
 
   images: {
-    unoptimized: true,
+    formats: ["image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    quality: 80,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+      },
+    ],
   },
 
   trailingSlash: true,
