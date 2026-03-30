@@ -11,15 +11,16 @@ const client = createClient({
 async function seed() {
   console.log("Seeding Sanity content...")
 
-  // Hero
+  // Hero - fields must match schema: badge, title, highlightedText, description, buttonText, telegramButtonText
   await client.createOrReplace({
     _id: "hero",
     _type: "hero",
-    title: "Получите водительские права быстро и без лишних хлопот",
-    subtitle: "Профессиональная помощь в получении водительского удостоверения категорий A, B, C, D. Гарантия результата, прозрачные условия, поддержка на каждом этапе.",
-    ctaText: "Получить консультацию",
-    ctaSecondaryText: "Узнать подробнее",
-    statsEnabled: true,
+    badge: "Более 2500 довольных клиентов с 2019 года",
+    title: "Получить водительские права",
+    highlightedText: "Оформить права быстро, официально и с гарантией результата",
+    description: "Заказать водительское удостоверение категории B, C, D без лишних хлопот. Полное юридическое сопровождение и прозрачные цены.",
+    buttonText: "Бесплатная консультация",
+    telegramButtonText: "Telegram",
   })
   console.log("✓ Hero")
 
@@ -370,19 +371,17 @@ async function seed() {
   })
   console.log("✓ FAQ")
 
-  // Contact
+  // Contact - fields must match schema: title, description, buttonText, formFields
   await client.createOrReplace({
     _id: "contact",
     _type: "contact",
-    title: "Свяжитесь с нами",
-    description: "Оставьте заявку и мы перезвоним вам в течение 15 минут",
-    phone: "+7 (999) 123-45-67",
-    email: "info@patriot-prava.ru",
-    whatsapp: "+79991234567",
-    telegram: "@patriot_prava",
-    workingHours: "Пн-Вс: 9:00 - 21:00",
-    formTitle: "Получить консультацию",
-    formButtonText: "Отправить заявку",
+    title: "Оставьте заявку",
+    description: "Заполните форму и мы свяжемся с вами в ближайшее время",
+    buttonText: "Отправить заявку",
+    formFields: {
+      nameLabel: "Ваше имя",
+      phoneLabel: "Номер телефона",
+    },
   })
   console.log("✓ Contact")
 
@@ -414,12 +413,19 @@ async function seed() {
   })
   console.log("✓ License")
 
-  // Site Settings
+  // Site Settings - fields must match schema
   await client.createOrReplace({
     _id: "siteSettings",
     _type: "siteSettings",
-    siteName: "Patriot Prava",
-    siteDescription: "Профессиональная помощь в получении водительского удостоверения",
+    seoTitle: "Получить водительские права | Оформить права без автошколы",
+    seoDescription: "Получить водительские права быстро и надёжно. Оформить права без автошколы с гарантией качества.",
+    siteUrl: "https://patriot-prava.ru",
+    phone: "+7 (914) 064-75-20",
+    email: "robert.byrd.942@mail.ru",
+    telegram: "https://t.me/aprawa",
+    whatsapp: "https://wa.me/79140647520",
+    workingHours: "Пн-Вс: 9:00 - 21:00",
+    address: "Москва, ул. Примерная, 1",
   })
   console.log("✓ Site Settings")
 
