@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next"
 
-export const dynamic = "force-static"
-
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = process.env.SITE_URL || "https://patriot-prava.ru"
+
   return {
     rules: [
       {
@@ -11,6 +11,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/admin/", "/_next/"],
       },
     ],
-    sitemap: "https://patriot-prava.ru/sitemap.xml",
+    sitemap: `${baseUrl}/sitemap.xml`,
   }
 }

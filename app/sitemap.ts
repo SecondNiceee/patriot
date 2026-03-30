@@ -1,9 +1,7 @@
 import type { MetadataRoute } from "next"
 
-export const dynamic = "force-static"
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://patriot-prava.ru"
+  const baseUrl = process.env.SITE_URL || "https://patriot-prava.ru"
 
   return [
     {
