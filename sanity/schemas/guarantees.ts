@@ -22,6 +22,44 @@ export default defineType({
       name: "items",
       title: "Список гарантий",
       type: "array",
+      initialValue: [
+        {
+          _type: "object",
+          icon: "FileCheck",
+          title: "Официальное оформление",
+          description: "100% официальное оформление всех документов",
+        },
+        {
+          _type: "object",
+          icon: "Banknote",
+          title: "Возврат средств",
+          description: "Возврат средств, если не получите права",
+        },
+        {
+          _type: "object",
+          icon: "Lock",
+          title: "Конфиденциальность",
+          description: "Конфиденциальность ваших данных",
+        },
+        {
+          _type: "object",
+          icon: "Award",
+          title: "Прозрачные цены",
+          description: "Прозрачное ценообразование без скрытых платежей",
+        },
+        {
+          _type: "object",
+          icon: "Shield",
+          title: "Юридическое сопровождение",
+          description: "Юридическое сопровождение на всех этапах",
+        },
+        {
+          _type: "object",
+          icon: "Headphones",
+          title: "Поддержка после получения",
+          description: "Поддержка после получения прав",
+        },
+      ],
       of: [
         {
           type: "object",

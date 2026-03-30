@@ -22,6 +22,15 @@ export default defineType({
       name: "quickLinks",
       title: "Быстрые ссылки",
       type: "array",
+      initialValue: [
+        { _type: "object", label: "Услуги", href: "#services" },
+        { _type: "object", label: "Преимущества", href: "#features" },
+        { _type: "object", label: "Процесс", href: "#process" },
+        { _type: "object", label: "Гарантии", href: "#guarantees" },
+        { _type: "object", label: "Отзывы", href: "#testimonials" },
+        { _type: "object", label: "FAQ", href: "#faq" },
+        { _type: "object", label: "Контакты", href: "#contact" },
+      ],
       of: [
         {
           type: "object",
