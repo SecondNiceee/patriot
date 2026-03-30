@@ -1,4 +1,4 @@
-const { createClient } = require("@sanity/client")
+import { createClient } from "@sanity/client"
 
 const client = createClient({
   projectId: "tegzgdyt",
@@ -174,7 +174,7 @@ const defaultContent = {
         step: 3,
         title: "Оформление документов",
         description:
-          "Собираем и оформляем все необходимые документы для получения водительско��о удостоверения.",
+          "Собираем и оформляем все необходимые документы для получения водительского удостоверения.",
       },
       {
         _type: "object",
