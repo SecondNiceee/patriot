@@ -155,8 +155,6 @@ export interface SiteSettingsData {
   max?: string
   workingHours?: string
   address?: string
-  telegramBotToken?: string
-  telegramChatId?: string
   headScripts?: HeadScript[]
 }
 
