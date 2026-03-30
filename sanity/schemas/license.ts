@@ -27,6 +27,18 @@ export default defineType({
       name: "images",
       title: "Изображения лицензий",
       type: "array",
+      initialValue: [
+        {
+          _type: "object",
+          alt: "Лицензия на образовательную деятельность",
+          title: "Лицензия",
+        },
+        {
+          _type: "object",
+          alt: "Приложение к лицензии",
+          title: "Приложение",
+        },
+      ],
       of: [
         {
           type: "object",

@@ -24,6 +24,14 @@ export default defineType({
       name: "navigation",
       title: "Пункты навигации",
       type: "array",
+      initialValue: [
+        { _type: "object", label: "Услуги", href: "#services" },
+        { _type: "object", label: "Преимущества", href: "#features" },
+        { _type: "object", label: "Процесс", href: "#process" },
+        { _type: "object", label: "Гарантии", href: "#guarantees" },
+        { _type: "object", label: "Отзывы", href: "#testimonials" },
+        { _type: "object", label: "FAQ", href: "#faq" },
+      ],
       of: [
         {
           type: "object",
