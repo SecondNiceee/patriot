@@ -76,6 +76,18 @@ export default defineType({
       initialValue: "Москва, ул. Примерная, 1",
     }),
     defineField({
+      name: "telegramBotToken",
+      title: "Токен Telegram бота",
+      type: "string",
+      description: "Токен бота для отправки заявок (получите у @BotFather)",
+    }),
+    defineField({
+      name: "telegramChatId",
+      title: "Chat ID Telegram",
+      type: "string",
+      description: "ID чата или канала, куда будут приходить заявки",
+    }),
+    defineField({
       name: "headScripts",
       title: "Скрипты в head",
       type: "array",
