@@ -1,5 +1,3 @@
-"use client"
-
 import {
   Car, Truck, Bus, Bike,
   FileCheck, FileText, FileBadge, Clipboard, ClipboardCheck,
@@ -10,7 +8,7 @@ import {
   Star, CheckCircle, ThumbsUp, RefreshCw, Settings, Database, Globe, MapPin, BarChart,
   type LucideIcon,
 } from "lucide-react"
-import { useFeatures } from "@/hooks/use-sanity"
+import type { FeaturesData } from "@/lib/sanity"
 
 // Icon mapping — должен совпадать с iconOptions.ts
 const iconMap: Record<string, LucideIcon> = {
@@ -75,9 +73,11 @@ const defaultData = {
   description: "Получить водительское удостоверение с профессиональной поддержкой на каждом этапе",
 }
 
-export function Features() {
-  const { data, isLoading } = useFeatures()
+interface FeaturesProps {
+  data: FeaturesData | null
+}
 
+export function Features({ data }: FeaturesProps) {
   const sectionBadge = data?.sectionBadge ?? defaultData.sectionBadge
   const title = data?.title ?? defaultData.title
   const description = data?.description ?? defaultData.description

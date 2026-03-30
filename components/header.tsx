@@ -4,8 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
 import { useState, useEffect } from "react"
-import { useHeader } from "@/hooks/use-sanity"
-import { getSanityImageUrl } from "@/lib/sanity"
+import { getSanityImageUrl, type HeaderData } from "@/lib/sanity"
 
 // Default data
 const defaultMenuItems = [
@@ -21,10 +20,13 @@ const defaultData = {
   ctaButtonText: "Связаться",
 }
 
-export function Header() {
+interface HeaderProps {
+  data: HeaderData | null
+}
+
+export function Header({ data }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const { data, isLoading } = useHeader()
 
   useEffect(() => {
     const handleScroll = () => {

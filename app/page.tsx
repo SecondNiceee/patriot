@@ -12,24 +12,72 @@ import { Testimonials } from "@/components/testimonials"
 import { Footer } from "@/components/footer"
 import { FloatingSocials } from "@/components/floating-socials"
 import { PopupForm } from "@/components/popup-form"
+import {
+  getHero,
+  getHeader,
+  getStats,
+  getFeatures,
+  getServices,
+  getProcess,
+  getGuarantees,
+  getLicense,
+  getTestimonials,
+  getFaq,
+  getContact,
+  getFooter,
+  getSiteSettings,
+} from "@/lib/sanity"
 
-export default function HomePage() {
+export const revalidate = 60 // ISR: revalidate every 60 seconds
+
+export default async function HomePage() {
+  // Fetch all data on the server in parallel
+  const [
+    heroData,
+    headerData,
+    statsData,
+    featuresData,
+    servicesData,
+    processData,
+    guaranteesData,
+    licenseData,
+    testimonialsData,
+    faqData,
+    contactData,
+    footerData,
+    siteSettingsData,
+  ] = await Promise.all([
+    getHero(),
+    getHeader(),
+    getStats(),
+    getFeatures(),
+    getServices(),
+    getProcess(),
+    getGuarantees(),
+    getLicense(),
+    getTestimonials(),
+    getFaq(),
+    getContact(),
+    getFooter(),
+    getSiteSettings(),
+  ])
+
   return (
     <main className="min-h-screen">
-      <Header />
-      <FloatingSocials />
-      <PopupForm />
-      <Hero />
-      <Stats />
-      <Features />
-      <Services />
-      <Process />
-      <Guarantees />
-      <License />
-      <ContactForm />
-      <Testimonials />
-      <Faq />
-      <Footer />
+      <Header data={headerData} />
+      <FloatingSocials data={siteSettingsData} />
+      <PopupForm data={siteSettingsData} />
+      <Hero data={heroData} />
+      <Stats data={statsData} />
+      <Features data={featuresData} />
+      <Services data={servicesData} />
+      <Process data={processData} />
+      <Guarantees data={guaranteesData} />
+      <License data={licenseData} />
+      <ContactForm data={contactData} siteSettings={siteSettingsData} />
+      <Testimonials data={testimonialsData} />
+      <Faq data={faqData} />
+      <Footer data={footerData} siteSettings={siteSettingsData} />
     </main>
   )
 }

@@ -3,8 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import { Award, X, ChevronLeft, ChevronRight } from "lucide-react"
-import { useLicense } from "@/hooks/use-sanity"
-import { getSanityImageUrl } from "@/lib/sanity"
+import { getSanityImageUrl, type LicenseData } from "@/lib/sanity"
 
 // Default data
 const defaultLicenseImages = [
@@ -31,9 +30,12 @@ const defaultData = {
   licenseNumber: "Лицензия № 6651 — Серия 61Л01 № 0004324 — Бессрочная",
 }
 
-export function License() {
+interface LicenseProps {
+  data: LicenseData | null
+}
+
+export function License({ data }: LicenseProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
-  const { data, isLoading } = useLicense()
 
   const title = data?.title ?? defaultData.title
   const description = data?.description ?? defaultData.description

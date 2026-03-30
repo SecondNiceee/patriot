@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Check, ArrowRight } from "lucide-react"
-import { useProcess } from "@/hooks/use-sanity"
+import type { ProcessData } from "@/lib/sanity"
 
 // Default data
 const defaultSteps = [
@@ -44,9 +44,12 @@ const defaultData = {
   description: "Простой и прозрачный путь к оформлению прав за 6 шагов",
 }
 
-export function Process() {
+interface ProcessProps {
+  data: ProcessData | null
+}
+
+export function Process({ data }: ProcessProps) {
   const [activeStep, setActiveStep] = useState(0)
-  const { data, isLoading } = useProcess()
 
   const sectionBadge = data?.sectionBadge ?? defaultData.sectionBadge
   const title = data?.title ?? defaultData.title
