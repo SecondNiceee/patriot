@@ -2,8 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Send } from "lucide-react"
-import { useHero } from "@/hooks/use-sanity"
-import { getSanityImageUrl } from "@/lib/sanity"
+import { getSanityImageUrl, type HeroData } from "@/lib/sanity"
 
 // Default data
 const defaultData = {
@@ -16,9 +15,11 @@ const defaultData = {
   backgroundImage: "/images/license-document.png",
 }
 
-export function Hero() {
-  const { data, isLoading } = useHero()
+interface HeroProps {
+  data: HeroData | null
+}
 
+export function Hero({ data }: HeroProps) {
   const badge = data?.badge ?? defaultData.badge
   const title = data?.title ?? defaultData.title
   const subtitle = data?.highlightedText ?? data?.subtitle ?? defaultData.subtitle

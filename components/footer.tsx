@@ -1,8 +1,6 @@
-"use client"
-
 import Link from "next/link"
 import { Phone, Mail } from "lucide-react"
-import { useFooter, useSiteSettings } from "@/hooks/use-sanity"
+import type { FooterData, SiteSettingsData } from "@/lib/sanity"
 
 // Default data
 const defaultData = {
@@ -22,17 +20,19 @@ const defaultSettings = {
   email: "robert.byrd.942@mail.ru",
 }
 
-export function Footer() {
-  const { data } = useFooter()
-  const { data: settings } = useSiteSettings()
+interface FooterProps {
+  data: FooterData | null
+  siteSettings: SiteSettingsData | null
+}
 
+export function Footer({ data, siteSettings }: FooterProps) {
   const siteName = data?.siteName ?? defaultData.siteName
   const description = data?.description ?? defaultData.description
   const quickLinks = data?.quickLinks?.length ? data.quickLinks : defaultData.quickLinks
   const copyrightText = data?.copyrightText ?? defaultData.copyrightText
   
-  const phone = settings?.phone ?? defaultSettings.phone
-  const email = settings?.email ?? defaultSettings.email
+  const phone = siteSettings?.phone ?? defaultSettings.phone
+  const email = siteSettings?.email ?? defaultSettings.email
 
   return (
     <footer className="relative py-12 px-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">

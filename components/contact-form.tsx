@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Send, Mail, Phone, Clock, MapPin, Loader2, CheckCircle } from "lucide-react"
 import { MaxIcon } from "@/components/icons/max-icon"
-import { useSiteSettings } from "@/hooks/use-sanity"
+import type { ContactData, SiteSettingsData } from "@/lib/sanity"
 
 // WhatsApp icon component
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -46,10 +46,12 @@ function validateRussianPhone(phone: string): boolean {
   return digits.length === 11 && (digits.startsWith("7") || digits.startsWith("8"))
 }
 
-export function ContactForm() {
-  // Загружаем настройки динамически на клиенте (не запекается при билде)
-  const { data: siteSettings } = useSiteSettings()
-  
+interface ContactFormProps {
+  data: ContactData | null
+  siteSettings: SiteSettingsData | null
+}
+
+export function ContactForm({ data, siteSettings }: ContactFormProps) {
   // Extract settings with fallbacks
   const phone = siteSettings?.phone || "+7 (914) 064-75-20"
   const workingHours = siteSettings?.workingHours || "Пн-Вс: 9:00 - 21:00"
@@ -58,6 +60,7 @@ export function ContactForm() {
   const whatsapp = siteSettings?.whatsapp
   const max = siteSettings?.max
   const email = siteSettings?.email || "robert.byrd.942@mail.ru"
+  
   const [formData, setFormData] = useState({
     name: "",
     phone: "",

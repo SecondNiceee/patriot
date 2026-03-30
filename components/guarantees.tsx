@@ -1,5 +1,3 @@
-"use client"
-
 import {
   Car, Truck, Bus, Bike,
   FileCheck, FileText, FileBadge, Clipboard, ClipboardCheck,
@@ -10,7 +8,7 @@ import {
   Star, CheckCircle, ThumbsUp, RefreshCw, Settings, Database, Globe, MapPin, BarChart,
   type LucideIcon,
 } from "lucide-react"
-import { useGuarantees } from "@/hooks/use-sanity"
+import type { GuaranteesData } from "@/lib/sanity"
 
 // Icon mapping — должен совпадать с iconOptions.ts
 const iconMap: Record<string, LucideIcon> = {
@@ -62,9 +60,11 @@ const defaultData = {
   description: "Заказать водительское удостоверение с полной ответственностью за результат",
 }
 
-export function Guarantees() {
-  const { data, isLoading } = useGuarantees()
+interface GuaranteesProps {
+  data: GuaranteesData | null
+}
 
+export function Guarantees({ data }: GuaranteesProps) {
   const title = data?.title ?? defaultData.title
   const description = data?.description ?? defaultData.description
   const guarantees = data?.items?.length ? data.items : defaultGuarantees

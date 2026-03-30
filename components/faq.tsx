@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Plus, Minus, HelpCircle } from "lucide-react"
-import { useFaq } from "@/hooks/use-sanity"
+import type { FaqData } from "@/lib/sanity"
 
 // Default data
 const defaultFaqs = [
@@ -43,9 +43,12 @@ const defaultData = {
   description: "Ответы на популярные вопросы об оформлении водительского удостоверения. Не нашли ответ? Свяжитесь с нами!",
 }
 
-export function Faq() {
+interface FaqProps {
+  data: FaqData | null
+}
+
+export function Faq({ data }: FaqProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
-  const { data, isLoading } = useFaq()
 
   const title = data?.title ?? defaultData.title
   const description = data?.description ?? defaultData.description

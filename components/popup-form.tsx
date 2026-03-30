@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { X, Loader2, CheckCircle, Phone } from "lucide-react"
-import { useSiteSettings } from "@/hooks/use-sanity"
+import type { SiteSettingsData } from "@/lib/sanity"
 
 function formatPhoneNumber(value: string): string {
   const digits = value.replace(/\D/g, "")
@@ -34,10 +34,12 @@ function validateRussianPhone(phone: string): boolean {
   return digits.length === 11 && (digits.startsWith("7") || digits.startsWith("8"))
 }
 
-export function PopupForm() {
-  // Загружаем настройки динамически на клиенте
-  const { data: siteSettings } = useSiteSettings()
-  const email = siteSettings?.email || "robert.byrd.942@mail.ru"
+interface PopupFormProps {
+  data: SiteSettingsData | null
+}
+
+export function PopupForm({ data }: PopupFormProps) {
+  const email = data?.email || "robert.byrd.942@mail.ru"
   const [isOpen, setIsOpen] = useState(false)
   const [formData, setFormData] = useState({ name: "", phone: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)

@@ -2,8 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { useServices } from "@/hooks/use-sanity"
-import { getSanityImageUrl } from "@/lib/sanity"
+import { getSanityImageUrl, type ServicesData } from "@/lib/sanity"
 
 // Default data
 const defaultServices = [
@@ -62,9 +61,11 @@ const defaultData = {
   description: "Предоставляем полный спектр услуг по получению водительских прав любой категории. От консультации до готового удостоверения в руках.",
 }
 
-export function Services() {
-  const { data, isLoading } = useServices()
+interface ServicesProps {
+  data: ServicesData | null
+}
 
+export function Services({ data }: ServicesProps) {
   const title = data?.title ?? defaultData.title
   const description = data?.description ?? defaultData.description
   const services = data?.items?.length 

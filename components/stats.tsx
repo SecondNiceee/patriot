@@ -1,6 +1,4 @@
-"use client"
-
-import { useStats } from "@/hooks/use-sanity"
+import type { StatsData } from "@/lib/sanity"
 
 // Default data
 const defaultStats = [
@@ -10,9 +8,11 @@ const defaultStats = [
   { value: "24/7", label: "Поддержка клиентов" },
 ]
 
-export function Stats() {
-  const { data, isLoading } = useStats()
-  
+interface StatsProps {
+  data: StatsData | null
+}
+
+export function Stats({ data }: StatsProps) {
   const stats = data?.items?.length ? data.items : defaultStats
 
   return (

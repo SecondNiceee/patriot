@@ -1,7 +1,5 @@
-"use client"
-
 import { Star, Quote } from "lucide-react"
-import { useTestimonials } from "@/hooks/use-sanity"
+import type { TestimonialsData } from "@/lib/sanity"
 
 // Default data
 const defaultTestimonials = [
@@ -31,9 +29,11 @@ const defaultData = {
   description: "Реальные отзывы тех, кто уже получил права с нами",
 }
 
-export function Testimonials() {
-  const { data, isLoading } = useTestimonials()
+interface TestimonialsProps {
+  data: TestimonialsData | null
+}
 
+export function Testimonials({ data }: TestimonialsProps) {
   const sectionBadge = data?.sectionBadge ?? defaultData.sectionBadge
   const title = data?.title ?? defaultData.title
   const description = data?.description ?? defaultData.description

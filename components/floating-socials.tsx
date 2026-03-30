@@ -1,11 +1,11 @@
-"use client"
-
 import Image from "next/image"
-import { useSiteSettings } from "@/hooks/use-sanity"
+import type { SiteSettingsData } from "@/lib/sanity"
 
-export function FloatingSocials() {
-  const { data } = useSiteSettings()
+interface FloatingSocialsProps {
+  data: SiteSettingsData | null
+}
 
+export function FloatingSocials({ data }: FloatingSocialsProps) {
   // Собираем только те соцсети, у которых указана ссылка
   const socials = [
     {
