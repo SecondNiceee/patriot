@@ -36,8 +36,7 @@ import {
   getFooterWithDefaults,
 } from "@/lib/sanity"
 
-export const revalidate = 0 // Always fetch fresh data from Sanity
-export const dynamic = 'force-dynamic' // Force dynamic rendering, no caching
+export const revalidate = 60 // Revalidate every 60 seconds
 
 export default async function HomePage() {
   // Fetch all data on the server in parallel
@@ -70,10 +69,6 @@ export default async function HomePage() {
     getFooterWithDefaults(),
     getSiteSettings(),
   ])
-
-  // Debug: log fetched data to see what Sanity returns
-  console.log("[v0] Hero data from Sanity:", JSON.stringify(heroData, null, 2))
-  console.log("[v0] Services data from Sanity:", JSON.stringify(servicesData?.title, null, 2))
 
   return (
     <main className="min-h-screen">
